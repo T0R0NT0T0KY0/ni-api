@@ -1,13 +1,17 @@
+create type comment_object_types as enum ('photo', 'video', 'discussion');
+
+
 create table comments
 (
-    id          serial primary key
-        constraint comments_id_pk,
+    id          serial
+        constraint comments_id_pk
+            primary key,
     owner_id    int     not null
-        references user (id),
-    object_type text    not null,
+        references users (id),
+    object_type comment_object_types,
+
     object_id   integer not null,
-    text        text,
-    check ( object_type = 'photo' or object_type = 'video' or object_type = 'discussion')
+    text        text
 );
 
 create view view_comments as

@@ -1,15 +1,15 @@
 create table users
 (
-    id           serial not null primary key
-        constraint users_id_pk,
+    id           serial not null
+        constraint users_id_pk
+            primary key,
     name         text   not null,
     display_name text   not null
-        constraint users_display_name_unique
+        constraint usersx_display_name_unique
             unique,
-    country_id   integer
-        constraint users_country_id_fkey,
-    phone text not null
-    unique,
-    email text not null
-    unique
-)
+    country_id integer references cities(id),
+    phone        text   not null
+        unique,
+    email        text   not null unique
+);
+
